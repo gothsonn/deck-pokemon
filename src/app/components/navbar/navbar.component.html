@@ -1,0 +1,36 @@
+<igx-navbar title="Baralho Pokemon" actionButtonIcon="menu">
+  <igx-navbar-action>
+    <button igxIconButton="flat">
+      <igx-icon>menu</igx-icon>
+    </button>
+  </igx-navbar-action>
+</igx-navbar>
+<div class="content-wrap">
+  <igx-nav-drawer id="navigation" [isOpen]="true">
+    <ng-template igxDrawer>
+      <nav>
+        <span igxDrawerItem [isHeader]="true">Menu</span>
+
+        <span
+          igxDrawerItem
+          igxRipple
+          *ngFor="let item of componentLinks"
+          routerLink="{{item.link}}"
+          routerLinkActive #rla="routerLinkActive"
+          [active]="rla.isActive"
+        >
+          {{item.name}}
+          </span>
+      </nav>
+    </ng-template>
+  </igx-nav-drawer>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+
+<!--<div class="content">-->
+<!--  <router-outlet></router-outlet>-->
+<!--</div>-->

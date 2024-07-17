@@ -1,0 +1,66 @@
+@if (spinner()){
+  <igx-circular-bar
+    [animate]="false"
+    [indeterminate]="true"
+    [textVisibility]="false"
+  ></igx-circular-bar>
+}
+
+<h4 class="text-2xl font-bold mb-4">Criar Baralho</h4>
+<div class="grid grid-cols-3 gap-4 mx-auto mt-4">
+  <div class="col-span-2">
+    <igx-input-group class="">
+      <label igxLabel for="deckName">Nome</label>
+      <input igxInput name="deckName" id="deckName" type="text" [(ngModel)]="deck().name" [ngModelOptions]="{standalone: true}" required />
+    </igx-input-group>
+  </div>
+  <div class="col-span-2">
+    <igx-input-group>
+      <label igxLabel for="filterCards">Filtrar Cartas</label>
+      <input igxInput name="filterCards" id="filterCards" type="text" placeholder="Pressione ENTER"/>
+    </igx-input-group>
+  </div>
+</div>
+
+<div class="mb-4">
+  <cdk-virtual-scroll-viewport itemSize="320" class="grid-container" (scrolledIndexChange)="onScrollIndexChange()">
+    <div *cdkVirtualFor="let group of groupedCards">
+      <div class="row">
+        @for (card of group; track card.id ){
+          <div class="card-item">
+            <igx-card elevated style="margin: 4px;" >
+              <igx-card-media height="280px">
+                <img [src]="card.images.small" alt="{{card.name}}" class="card-image">
+              </igx-card-media>
+              <igx-card-actions>
+                <button (click)="addCard(card)" igxButton="flat" igxRipple>Adicionar Carta</button>
+              </igx-card-actions>
+            </igx-card>
+          </div>
+        }
+      </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>
+<div class="mb-4">
+  <igx-expansion-panel>
+    <igx-expansion-panel-header>
+      <igx-expansion-panel-title >
+        Cartas do selecionadas : {{ deck().cards.length }}
+      </igx-expansion-panel-title>
+    </igx-expansion-panel-header>
+    <igx-expansion-panel-body>
+      @for (card of deck().cards; track card.id ){
+        <div class="border p-2 my-2 rounded">
+          <p>{{ card.name }}</p>
+        </div>
+      }
+    </igx-expansion-panel-body>
+  </igx-expansion-panel>
+
+</div>
+<button (click)="addDeck()" igxButton="contained" igxRipple class="mr-2">Salvar</button>
+<a routerLink="/decks" igxButton="contained" igxRipple>Cancelar</a>
+
+<!-- Dialog -->
+<app-dialog [title]="'Alert'" [message]="dialogMessage"></app-dialog>

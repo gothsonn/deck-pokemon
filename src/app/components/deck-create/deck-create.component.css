@@ -1,0 +1,38 @@
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 800px;
+  overflow: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  padding-bottom: 10px;
+}
+
+.card-item {
+  flex: 1;
+  max-width: 250px;
+  box-sizing: border-box;
+}
+
+igx-card {
+  width: 250px;
+  height: 340px;
+  box-sizing: border-box;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill !important;
+}
+
+.custom-size {
+  margin-top: 20px;
+  width: 50px;
+  height: 50px;
+}

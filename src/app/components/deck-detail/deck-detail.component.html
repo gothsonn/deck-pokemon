@@ -1,0 +1,19 @@
+@if(deck){
+  <p>Total de Pokémon: {{ pokemonCount }}</p>
+  <p>Total de Treinadores: {{ trainerCount }}</p>
+  <p>Tipos Únicos: {{ uniqueTypes }}</p>
+  <div class="mb-4">
+    <div class="grid grid-cols-5 gap-6">
+      @for (card of deck.cards; track card){
+        <igx-card elevated="2">
+          <igx-card-header>
+            <img [src]="card.images.small" alt="{{ card.name }}" class="w-full h-auto">
+          </igx-card-header>
+          <igx-card-content>
+            <h3>{{ card.name }}</h3>
+          </igx-card-content>
+        </igx-card>
+      }
+    </div>
+  </div>
+}

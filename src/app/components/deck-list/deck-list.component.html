@@ -1,0 +1,27 @@
+<div class="container mx-auto mt-4">
+  <h1 class="text-2xl font-bold mb-4">Baralhos</h1>
+  <p>
+    <a routerLink="/create" class="bg-blue-500 text-white px-4 py-2 rounded">Criar Novo Baralho</a>
+  </p>
+  @if(decks$ | async; as decks) {
+    @if(decks.length === 0) {
+      <div class="text-center">
+        <p>Sem baralhos disponiveis. Crie um novo baralho</p>
+      </div>
+    } @else {
+      @for (deck of decks; track deck) {
+        <igx-expansion-panel>
+          <igx-expansion-panel-header>
+            <igx-expansion-panel-title class="flex justify-between">
+              <div>{{ deck.name }}</div>
+              <a igxButton="contained" target="_blank" (click)="removeDeck(deck.id)">Remove</a>
+            </igx-expansion-panel-title>
+          </igx-expansion-panel-header>
+          <igx-expansion-panel-body>
+            <app-deck-detail [deckId]="deck.id"></app-deck-detail>
+          </igx-expansion-panel-body>
+        </igx-expansion-panel>
+      }
+    }
+  }
+</div>
